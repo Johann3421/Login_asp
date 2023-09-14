@@ -4,59 +4,95 @@
 }
 
 <!DOCTYPE html>
-
-<html>
+<html lang="es">
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Registrarse</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Cambiar el color de fondo */
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #007bff; /* Cambiar el color del encabezado */
+            color: #fff;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+            font-size: 24px;
+            padding: 1rem 0;
+        }
+
+        .form-control {
+            border: 2px solid #ced4da; /* Cambiar el color del borde de los campos de entrada */
+            border-radius: 12px;
+        }
+
+        .btn-primary {
+            background-color: #007bff; /* Cambiar el color del botón */
+            border: none;
+            border-radius: 12px;
+            padding: 10px 20px;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3; /* Cambiar el color del botón al pasar el ratón por encima */
+            }
+
+        .alert {
+            border-radius: 12px;
+        }
+    </style>
 </head>
 <body>
 
     <div class="container mt-5 pt-5">
-
         <div class="row justify-content-center">
             <div class="col-12 col-xl-4 col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Registrate
+                        Regístrate
                     </div>
                     <div class="card-body">
                         <form asp-controller="Inicio" asp-action="Registrarse" method="post">
-
-                            <input class="form-control mb3" type="text" placeholder="NombreCompleto" asp-for="NombreUsuario" required />
-                            <input class="form-control mb3" type="text" placeholder="Correo" asp-for="Correo" required />
-                            <input class="form-control mb3" type="password" placeholder="Contraseña" required asp-for="Clave" />
-
-                            <div class="d-grid gap-2 mb-3">
-                                <button class="btn btn-primary" type="submit">Registrate</button>
+                            <div class="mb-3">
+                                <input class="form-control" type="text" placeholder="Nombre Completo" asp-for="NombreUsuario" required>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" type="text" placeholder="Apellido" asp-for="Apellido" required>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" type="text" placeholder="Correo" asp-for="Correo" required>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" type="password" placeholder="Contraseña" required asp-for="Clave">
+                            </div>
+                            <div class="d-grid mb-3">
+                                <button class="btn btn-primary" type="submit">Regístrate</button>
                             </div>
                             @if (ViewData["Mensaje"] != null)
                             {
-                                <div class="form-group">
-                                    <div class="alert alert-danger" role="alert">
-                                        @ViewData["Mensaje"]
-                                    </div>
-
+                                <div class="alert alert-danger" role="alert">
+                                    @ViewData["Mensaje"]
                                 </div>
                             }
-                            ¿Ya tienes una cuenta?<a href="@Url.Action("IniciarSesion","Inicio")">Iniciar Sesion</a>
-
+                            ¿Ya tienes una cuenta? <a href="@Url.Action("IniciarSesion","Inicio")">Iniciar Sesión</a>
                         </form>
-
                     </div>
-
-
                 </div>
             </div>
-
-
         </div>
-
-
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
