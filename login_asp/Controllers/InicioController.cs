@@ -48,7 +48,7 @@ namespace login_asp.Controllers
             Usuario usuario_encontrado = await _usuarioServicio.GetUsuarios(correo,Utilidades.EncriptarClave(clave));
             if(usuario_encontrado == null)
             {
-                ViewData["Mensaje"] = "No se pudo crear el usuario";
+                ViewData["Mensaje"] = "No se Encontraron Coincidencias";
                 return View();
             }
 
