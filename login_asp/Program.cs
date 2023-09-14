@@ -4,6 +4,9 @@ using login_asp.Models;
 using login_asp.Servicios.Contrato;
 using login_asp.Servicios.Implementacion;
 
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +18,14 @@ builder.Services.AddDbContext<DbpruebaContext>(options =>
 });
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Inicio/IniciarSesion";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+
+    });
 
 var app = builder.Build();
 
@@ -30,6 +41,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
