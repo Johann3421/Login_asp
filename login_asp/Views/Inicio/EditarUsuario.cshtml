@@ -1,4 +1,4 @@
-﻿
+﻿@model login_asp.Models.Usuario
 @{
     Layout = null;
 }
@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Iniciar Sesión</title>
+    <title>Editar Usuario</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
     <style>
         body {
@@ -57,19 +57,28 @@
         <div class="row justify-content-center">
             <div class="col-12 col-xl-4 col-md-6">
                 <div class="card">
-                    <div class="card-header text-center">
-                        Iniciar Sesión
+                    <div class="card-header">
+                        Editar Usuario
                     </div>
                     <div class="card-body">
-                        <form asp-controller="Inicio" asp-action="IniciarSesion" method="post">
+                        <form asp-controller="Inicio" asp-action="EditarUsuario" method="post">
                             <div class="mb-3">
-                                <input class="form-control" type="text" placeholder="Correo" required name="correo">
+                                <input class="form-control" type="text" placeholder="ID de Usuario" asp-for="IdUsuario" required>
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" type="password" placeholder="Contraseña" required name="clave">
+                                <input class="form-control" type="text" placeholder="Nombre Completo" asp-for="NombreUsuario" required>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" type="text" placeholder="Apellido" asp-for="Apellido" required>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" type="text" placeholder="Correo" asp-for="Correo" required>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" type="password" placeholder="Contraseña" required asp-for="Clave">
                             </div>
                             <div class="d-grid mb-3">
-                                <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
+                                <button class="btn btn-primary" type="submit">Guardar Cambios</button>
                             </div>
                             @if (ViewData["Mensaje"] != null)
                             {
@@ -77,12 +86,9 @@
                                     @ViewData["Mensaje"]
                                 </div>
                             }
-                            <p class="text-center">¿No tienes una cuenta? <a href="@Url.Action("Registrarse","Inicio")">Regístrate</a></p>
-                            <p class="text-center">Edita tu usuario <a href="@Url.Action("EditarUsuario","Inicio")">Editar Usuario</a></p>
+                            <a href="@Url.Action("IniciarSesion","Inicio")">Cancelar</a>
                         </form>
                     </div>
-                 
-                    
                 </div>
             </div>
         </div>
@@ -92,4 +98,3 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

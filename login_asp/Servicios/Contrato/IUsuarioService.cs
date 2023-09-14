@@ -10,6 +10,8 @@ namespace login_asp.Servicios.Contrato
 
         Task<Usuario> SaveUsuarios(Usuario modelo);
 
+        Task<bool> ActualizarUsuario(Usuario modelo);
 
+        Task<Usuario> ObtenerUsuarioPorId(int id);
     }
 }

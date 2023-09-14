@@ -27,5 +27,24 @@ namespace login_asp.Servicios.Implementacion
             await _dbContext.SaveChangesAsync();
             return modelo;
         }
+        public async Task<bool> ActualizarUsuario(Usuario modelo)
+        {
+            try
+            {
+                _dbContext.Entry(modelo).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                // Manejo de errores, si es necesario
+                return false;
+            }
+        }
+        public async Task<Usuario> ObtenerUsuarioPorId(int id)
+        {
+            return await _dbContext.Usuarios.FindAsync(id);
+        }
+
     }
 }

@@ -70,5 +70,48 @@ namespace login_asp.Controllers
 
             return RedirectToAction("Index","Home");
         }
+        public IActionResult EditarUsuario(int id)
+            
+            {
+            
+                return View();
+            }
+
+        [HttpPost]
+        public async Task<IActionResult> EditarUsuario(Usuario modelo)
+        {
+            // Asegúrate de que el ID del usuario esté presente
+            if (modelo.IdUsuario == 0)
+            {
+                // Manejo del caso en el que el ID del usuario no esté presente
+                return NotFound(); // Otra respuesta si el usuario no se encuentra
+            }
+
+            try
+            {
+                // Encripta la nueva contraseña si es necesario
+                if (!string.IsNullOrEmpty(modelo.Clave))
+                {
+                    modelo.Clave = Utilidades.EncriptarClave(modelo.Clave);
+                }
+
+                // Actualiza el usuario en la base de datos
+                bool usuarioActualizado = await _usuarioServicio.ActualizarUsuario(modelo);
+
+                if (usuarioActualizado)
+                    return RedirectToAction("IniciarSesion", "Inicio");
+
+                ViewData["Mensaje"] = "No se pudo actualizar el Usuario";
+            }
+            catch (Exception)
+            {
+                // Manejo de errores, si es necesario
+                ViewData["Mensaje"] = "Ocurrió un error al intentar actualizar el Usuario";
+            }
+
+            // Si llegamos aquí, significa que hubo un error al actualizar el usuario
+            return View(modelo); // Puedes mostrar un mensaje de error en la vista
+        }
+
     }
 }
